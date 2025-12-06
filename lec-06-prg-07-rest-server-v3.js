@@ -43,6 +43,26 @@ const myManager = {
     }
 };
 
+app.route('/membership_api/:member_id')
+    .post((req, res) => {
+        const memberId = req.params.member_id;
+        const value = req.body[memberId];
+        res.json(myManager.create(memberId, value));
+    })
+    .get((req, res) => {
+        const memberId = req.params.member_id;
+        res.json(myManager.read(memberId));
+    })
+    .put((req, res) => {
+        const memberId = req.params.member_id;
+        const value = req.body[memberId];
+        res.json(myManager.update(memberId, value));
+    })
+    .delete((req, res) => {
+        const memberId = req.params.member_id;
+        res.json(myManager.delete(memberId));
+    });
+
 app.listen(port, () => {
     console.log(`REST API Server started on port ${port}`);
 });
